@@ -1,0 +1,44 @@
+BUILD FIRST
+userModel (admins and game masters)
+    - id
+    - email
+    - password
+    - role
+    - games ids
+
+BUILD SECOND
+sessionModel
+    - session id
+    - user id
+
+BUILD THIRD
+gamePlanModel (reusable, does not save state)
+    - id
+    - game master id
+    - rule flags
+    - markers
+        - QR codes
+        - questions and answers
+
+BUILD FOURTH
+activeGameModel (saves state, is generated when game is started)
+    - information transferred from gamePlanModel (so the latter can be modified during an ongoing game)
+    - game started time (if it's a timed game)
+    - list of players
+        - player 1 (activated: true)
+        - player 2 (activated: false)
+    - score history
+        - game 1 (finished: false)
+            - player 1
+            - player 2
+        - game 2 (finished: true)
+            - player 1
+            - player 2
+
+BUILD FIFTH
+playerModel (player is generated when it successfully joins a game)
+    - id
+    - name
+    - game id
+    - points
+    - amount of markers found
