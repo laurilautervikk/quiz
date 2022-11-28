@@ -45,10 +45,12 @@ function isAdmin(req, res, next) {
 
 userRouter.post("/register", userController.createUser);
 
+//TODO: move these to /sessions/login /sesssions/logout
 userRouter.post("/login", userController.loginUser);
 
 userRouter.get("/logout", userController.logoutUser);
 
+//TODO: remove these, they are just a proof of concept
 userRouter.get("/publicdata", userController.publicdataUser);
 
 userRouter.get("/userdata", isUser, userController.userdataUser);

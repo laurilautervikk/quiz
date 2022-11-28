@@ -3,7 +3,8 @@ import session from "express-session";
 import mongoose from "mongoose";
 
 import userRouter from "./routes/userRoutes.js";
-//import eventRouter from "./routes/eventRoutes.js";
+import gamePlanRouter from "./routes/gamePlanRoutes.js";
+
 import MongoStore from "connect-mongo";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -47,7 +48,7 @@ app.use(
 app.set("trust proxy", 1); // trust first proxy in production
 
 app.use("/users", userRouter);
-//app.use("/events", eventRouter);
+app.use("/game-plan", gamePlanRouter);
 
 //serving public files, img and such
 app.use("/", express.static(path.join(__dirname, "./public")));

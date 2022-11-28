@@ -5,7 +5,6 @@ userModel (admins and game masters)
     - password
     - role
 
-
 BUILD SECOND
 gamePlanModel (reusable, does not save state)
     - id (automatic)
@@ -25,14 +24,6 @@ activeGameModel (saves state, is generated when game is started)
     - list of players
         - player 1 (activated: true)
         - player 2 (activated: false)
-    - score history
-        - game 1 (finished: false)
-            - player 1
-            - player 2
-        - game 2 (finished: true)
-            - player 1
-            - player 2
-    - ownerId
 
 BUILD FOURTH
 playerModel (player is generated when it successfully joins a game)
@@ -40,6 +31,8 @@ playerModel (player is generated when it successfully joins a game)
     - name
     - points
     - amount of markers found
-    - game id
-    - game ownerId ??
+
+
+History is saved separately after game ends
+
 

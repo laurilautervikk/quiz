@@ -1,4 +1,4 @@
-import { User } from "../dbConnection.js";
+import { UserModel } from "../dbConnection.js";
 import bcrypt from "bcryptjs";
 
 export async function createUser(req, res) {
@@ -6,14 +6,14 @@ export async function createUser(req, res) {
     const { email, password, role } = req.body;
     const re = /\S+@\S+\.\S+/;
     if (re.test(email) && password.length > 4) {
-      const user = await User.findOne({ email: email });
+      const user = await UserModel.findOne({ email: email });
       if (!user) {
-        let createUser = new User({
+        let createUser = new UserModel({
           email: email,
           password: bcrypt.hashSync(password, 10),
           role: role,
         });
-        await User.create(createUser);
+        await UserModel.create(createUser);
         //send to login
         res.status(201).send({ message: "User created" });
       } else {
@@ -32,7 +32,7 @@ export async function loginUser(req, res) {
   try {
     const { email, password } = req.body;
     if (email && password) {
-      const user = await User.findOne({ email: email });
+      const user = await UserModel.findOne({ email: email });
       //const userId = ObjectId(user._id).valueOf();
       //console.log("user ", user);
       if (user) {
