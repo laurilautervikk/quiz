@@ -7,6 +7,6 @@ const PlayerSchema = new Schema({
   markersFound: { type: Number, required: true },
 });
 
-const PlayerModel = mongoose.model("PlayerModel", PlayerSchema);
+const Player = mongoose.model("Player", PlayerSchema);
 
-export default PlayerModel;
+export default Player;

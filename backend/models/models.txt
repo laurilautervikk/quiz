@@ -10,9 +10,10 @@ gamePlanModel (reusable, does not save state)
     - id (automatic)
     - title
     - rule flags (optional)
-    - markers
+    - map
+    - markers (separate model)
         - title
-        - QR codes
+        - QR code and link
         - questions and answers
     - ownerId
 
@@ -21,7 +22,7 @@ activeGameModel (saves state, is generated when game is started)
     - id (automatic)
     - information transferred from gamePlanModel (so the latter can be modified during an ongoing game)
     - game started time (if it's a timed game)
-    - list of players
+    - list of players (separate model)
         - player 1 (activated: true)
         - player 2 (activated: false)
 

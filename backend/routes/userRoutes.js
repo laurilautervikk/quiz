@@ -44,6 +44,7 @@ function isAdmin(req, res, next) {
 }
 
 userRouter.post("/register", userController.createUser);
+//parhaps add endpoints to edit user details and to delete a user
 
 //TODO: move these to /sessions/login /sesssions/logout
 userRouter.post("/login", userController.loginUser);

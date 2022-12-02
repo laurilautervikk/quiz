@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
-import UserModel from "./models/userModel.js";
-import GamePlanModel from "./models/gamePlanModel.js";
-import ActiveGameModel from "./models/activeGameModel.js";
-import PlayerModel from "./models/playerModel.js";
+import User from "./models/userModel.js";
+import GamePlan from "./models/gamePlanModel.js";
+import ActiveGame from "./models/activeGameModel.js";
+import Player from "./models/playerModel.js";
+import Marker from "./models/markerModel.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -10,4 +11,4 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
   console.log("Connected to MongoDB");
 });
 
-export { UserModel, GamePlanModel, ActiveGameModel, PlayerModel };
+export { User, GamePlan, ActiveGame, Player, Marker };
