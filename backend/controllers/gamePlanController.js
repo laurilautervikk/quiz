@@ -23,7 +23,7 @@ export async function createGame(req, res) {
   }
 }
 
-//make sure the frontend has valid gamePlanId in req.body, otherwise it will fail
+//make sure the frontend sends valid gamePlanId in req.body, otherwise it will fail
 export async function createMarker(req, res) {
   try {
     const { marker } = req.body;
@@ -59,6 +59,28 @@ export async function listGames(req, res) {
   try {
     const list = await GamePlan.find();
     res.status(200).send(list);
+  } catch (error) {
+    res.status(500).send({ error: error });
+  }
+}
+
+export async function getGame(req, res) {
+  try {
+    const filter = { _id: req.params.id };
+    let foundGamePlan = await GamePlan.findOne(filter);
+
+    res.status(200).send(foundGamePlan);
+  } catch (error) {
+    res.status(500).send({ error: error });
+  }
+}
+
+export async function getMarker(req, res) {
+  try {
+    const filter = { _id: req.params.id };
+    let foundMarker = await Marker.findOne(filter);
+
+    res.status(200).send(foundMarker);
   } catch (error) {
     res.status(500).send({ error: error });
   }
@@ -100,14 +122,13 @@ export async function updateMarker(req, res) {
   }
 }
 
-//remember to remove the marker id from GamePlan
 export async function deleteMarker(req, res) {
   try {
     const result = await Marker.deleteOne({ _id: req.params.id });
     if (result.deletedCount === 0) {
       res.status(403).send({ message: "Marker not found" });
     } else {
-      //remove marker from GamePlan
+      //removing marker from GamePlan
       const filter = { _id: req.body.gamePlanId };
       const update = {
         $pullAll: {
@@ -129,14 +150,21 @@ export async function deleteMarker(req, res) {
   }
 }
 
-//remember to delete all associated markers as well
 export async function deleteGame(req, res) {
   try {
-    const result = await GamePlan.deleteOne({ _id: req.params.id });
+    //finding the game and deleting its markers first
+    const filter = { _id: req.params.id };
+    const foundGamePlan = await GamePlan.findOne(filter);
+    const markers = foundGamePlan.markers;
+    for (const marker of markers) {
+      const deletingMarker = await Marker.deleteMany({ _id: marker });
+      console.log("deletingMarker ", deletingMarker);
+    }
+    //deleting the game
+    const result = await GamePlan.deleteOne(filter);
     if (result.deletedCount === 0) {
       res.status(403).send({ message: "Game not found" });
     } else {
-      //delete markers here
       res.status(204).send({ message: "Game deleted" });
     }
   } catch (error) {
