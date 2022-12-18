@@ -11,11 +11,27 @@ gamePlanModel (reusable, does not save state)
     - title
     - rule flags (optional)
     - map
-    - markers (separate model)
-        - title
-        - QR code and link
-        - questions and answers
+    - markers[
+        markerId1,
+        markerId2
+        ] (separate model)
+        
     - ownerId
+
+markerModel (Child of gamePlanModel)
+    - gamePlanId
+    - title
+    - content
+        - position
+            - x
+            - y
+    - qrcode
+    - quiz: {
+        - question
+        - answers: [
+            - text
+            - isCorrect
+            ]
 
 BUILD THIRD
 activeGameModel (saves state, is generated when game is started)

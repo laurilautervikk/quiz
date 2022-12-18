@@ -54,10 +54,6 @@ export async function loginUser(req, res) {
               if (err) return next(err);
               console.log("User logged in, cookie sent"); //load FE in http://localhost:5173/, not http://127.0.0.1:5173/
               //res.redirect("/"); //redirects here after login
-              // res.cookie("cookieName", "1", {
-              //   expires: new Date(Date.now() + 900000),
-              //   httpOnly: true,
-              // });
               res.status(200).send({ message: "User logged in" });
             });
           });
@@ -75,6 +71,14 @@ export async function loginUser(req, res) {
   }
 }
 
+//:TODO
+//user patch self (user)
+//user patch any (admin)
+
+//delete self (user)
+//delete any (admin)
+
+//FIND TEST ENDPOINTS BELOW - > REMOVE LATER
 export async function publicdataUser(req, res) {
   try {
     console.log("PD req.session.cookie ", req.session.cookie);

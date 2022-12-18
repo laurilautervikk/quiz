@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 import userRouter from "./routes/userRoutes.js";
 import gamePlanRouter from "./routes/gamePlanRoutes.js";
+import activeGameRouter from "./routes/activeGameRoutes.js";
 
 import MongoStore from "connect-mongo";
 import cors from "cors";
@@ -49,6 +50,7 @@ app.set("trust proxy", 1); // trust first proxy in production
 
 app.use("/users", userRouter);
 app.use("/game-plan", gamePlanRouter);
+app.use("/game", activeGameRouter);
 
 //serving public files, img and such
 app.use("/", express.static(path.join(__dirname, "./public")));
@@ -57,6 +59,11 @@ app.use("/", express.static(path.join(__dirname, "./public")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
+
+// //serv static FE to JOIN the game //this FE page posts the users name to BE activeGame class
+// app.get("/join", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../frontend/join.html"));
+// });
 
 app.listen(port, () => {
   console.log(`Server running at: http://localhost:${port}`);
